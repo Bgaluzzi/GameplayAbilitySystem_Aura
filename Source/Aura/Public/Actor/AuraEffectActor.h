@@ -30,7 +30,7 @@ class AURA_API AAuraEffectActor : public AActor
 {
 	GENERATED_BODY()
 	
-public:	
+public:
 	
 	AAuraEffectActor();
 
@@ -41,7 +41,7 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* TargetActor, TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	UFUNCTION(BlueprintCallable)
-	void OnOvelap(AActor* TargetActor);
+	void OnOverlap(AActor* TargetActor);
 	UFUNCTION(BlueprintCallable)
 	void OnEndOverlap(AActor* TargetActor);
 	
@@ -64,9 +64,10 @@ protected:
 	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Applied Effects")
 	EEffectRemovalPolicy InfiniteEffectRemovalPolicy = EEffectRemovalPolicy::RemoveOnEndOverlap;
-
 	
-
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandles;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "Applied Effects")
+	float ActorLevel = 1.f;
 	
 };
