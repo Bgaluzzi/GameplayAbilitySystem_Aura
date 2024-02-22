@@ -82,7 +82,6 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	// fill in data to props
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
-
 	
 }
 

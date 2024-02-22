@@ -21,5 +21,8 @@ public:
 	AAuraCharacter();
 
 	virtual void PossessedBy(AController* NewController) override;
-	
+
+private:
+
+	virtual void InitAbilityActorInfo() override;
 };
