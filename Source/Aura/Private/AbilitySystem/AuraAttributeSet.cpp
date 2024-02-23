@@ -15,7 +15,7 @@ UAuraAttributeSet::UAuraAttributeSet()
 	InitMaxMana(50.f);
 }
 
-// Clamping Attributes in this function before the change in attribute actually happens
+// Clamping Attributes in this function before the change in attribute actually happens, clamps value returned from querying modifier
 void UAuraAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
 {
 	Super::PreAttributeChange(Attribute, NewValue);
@@ -74,7 +74,7 @@ void UAuraAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData
 	
 }
 
-// Executed after a GameplayEffect changes an attribute
+// Executed after a GameplayEffect changes an attribute, clamp here effectively setting attribute values
 void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
 	Super::PostGameplayEffectExecute(Data);
@@ -82,7 +82,15 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	// fill in data to props
 	FEffectProperties Props;
 	SetEffectProperties(Data, Props);
-	
+
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.f, GetMaxMana()));
+	}
 }
 
 
