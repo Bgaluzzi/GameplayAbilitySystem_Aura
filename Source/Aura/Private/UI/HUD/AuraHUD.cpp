@@ -22,7 +22,6 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 
 	// tie both together
 	OverlayWidget->SetWidgetController(WidgetController);
-	
 	WidgetController->BroadcastInitialValues();
 	Widget->AddToViewport();
 }
