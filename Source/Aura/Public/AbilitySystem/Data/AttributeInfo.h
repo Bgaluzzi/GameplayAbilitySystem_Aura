@@ -1,0 +1,46 @@
+// Copyright Bruno Galuzzi Corsini
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
+#include "Engine/DataAsset.h"
+#include "AttributeInfo.generated.h"
+
+USTRUCT(BlueprintType)
+struct FAuraAttributeInfo
+{
+	GENERATED_BODY()
+
+	// initialize with empty gameplay tag
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FGameplayTag AttributeTag = FGameplayTag();
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FText AttributeName = FText();
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FText AttributeDescription = FText();
+	
+	UPROPERTY(BlueprintReadOnly)
+	float AttributeValue = 0.f;
+};
+
+/**
+ * 
+ */
+UCLASS()
+class AURA_API UAttributeInfo : public UDataAsset
+{
+	GENERATED_BODY()
+
+public:
+
+	// look up function, matches info to tag
+	FAuraAttributeInfo FindAttributeInfoForTag(const FGameplayTag& AttributeTag, bool bLogNotFound = false) const;
+
+	// list of actor info
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly)
+	TArray<FAuraAttributeInfo> AttributeInformation;
+	
+};

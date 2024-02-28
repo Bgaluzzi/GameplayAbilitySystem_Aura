@@ -6,11 +6,15 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
+#include "AuraGameplayTags.h"
 
 UAuraAttributeSet::UAuraAttributeSet()
 {
-	InitHealth(50.f);
-	InitMana(30.f);
+	const FAuraGameplayTags& GameplayTags = FAuraGameplayTags::Get();
+	
+	FAttributeSignature StrengthDelegate;
+	StrengthDelegate.BindStatic(GetStrengthAttribute);
+	TagsToAttributes.Add(GameplayTags.Attributes_Primary_Strength, StrengthDelegate);
 }
 
 // Clamping Attributes in this function before the change in attribute actually happens, clamps value returned from querying modifier
